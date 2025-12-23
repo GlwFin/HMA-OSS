@@ -72,6 +72,22 @@ jobs:
           # ========== 将自定义包名写入local.properties ==========
           echo customPackageName=${{ github.event.inputs.customPackageName }} >> local.properties
 
+      - name: Fix package references for custom build
+        if: ${{ github.event.inputs.customPackageName != '' }}
+        run: |
+          NEW_PKG="${{ github.event.inputs.customPackageName }}"
+          
+          # 1. 修复 Constants.kt
+          sed -i "s|import icu.nullptr.hma_oss.R|import $NEW_PKG.R|g" common/src/main/java/icu/nullptr/hidemyapplist/common/Constants.kt
+          sed -i "s|import icu.nullptr.hma_oss.BuildConfig|import $NEW_PKG.BuildConfig|g" common/src/main/java/icu/nullptr/hidemyapplist/common/Constants.kt
+          
+          # 2. 修复 jsonConfig.kt
+          sed -i "s|import icu.nullptr.hma_oss.R|import $NEW_PKG.R|g" common/src/main/java/icu/nullptr/hidemyapplist/common/jsonConfig.kt
+          sed -i "s|import icu.nullptr.hma_oss.BuildConfig|import $NEW_PKG.BuildConfig|g" common/src/main/java/icu/nullptr/hidemyapplist/common/jsonConfig.kt
+          
+          echo "✅ 已修复包名引用: $NEW_PKG"
+          
+
       - name: Cache gradle
         uses: actions/cache@v4
         with:
