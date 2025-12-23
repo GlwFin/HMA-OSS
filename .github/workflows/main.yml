@@ -47,6 +47,28 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
+
+      # ========== 新增：包名替换核心步骤 ==========
+      - name: Replace original package name with custom one
+        run: |
+          # 定义原包名和自定义包名（优先取手动输入的参数，push触发时用默认值）
+          ORIGINAL_PACKAGE="org.frknkrc44.hma_oss"
+          CUSTOM_PACKAGE="${{ github.event.inputs.customPackageName || env.DEFAULT_PACKAGE }}"
+          # 若push触发且无手动输入，使用原包名
+          if [ -z "$CUSTOM_PACKAGE" ]; then
+            CUSTOM_PACKAGE="org.frknkrc44.hma_oss"
+          fi
+          
+          echo "开始替换包名：$ORIGINAL_PACKAGE -> $CUSTOM_PACKAGE"
+          
+          # 1. 替换Kotlin/Java文件中的import语句
+          find ./app/src/main/java ./common/src/main/java -name "*.kt" -o -name "*.java" | \
+            xargs sed -i "s|import $ORIGINAL_PACKAGE|import $CUSTOM_PACKAGE|g"
+
+          echo "包名替换完成！"
+
+          
+
 #      - name: Write key
 #        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
 #        run: |
