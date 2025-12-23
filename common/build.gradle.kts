@@ -12,7 +12,9 @@ val appPackageName: String by rootProject.extra
 val appVerName: String by rootProject.extra
 
 android {
-    namespace = "$appPackageName.common"
+    // ========== 核心修改：添加包名空值校验，避免非法命名空间 ==========
+    val basePackage = if (appPackageName.isBlank()) "org.frknkrc44.hma_oss" else appPackageName
+    namespace = "$basePackage.common"
 
     buildFeatures {
         aidl = true
