@@ -12,6 +12,12 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    # 新增：手动触发时的自定义包名输入参数
+    inputs:
+      customPackageName:
+        description: '自定义Android应用包名（示例：com.example.myapp）'
+        required: false
+        default: 'org.frknkrc44.hma_oss' # 默认空值，使用原包名
 
 jobs:
   build:
@@ -63,6 +69,9 @@ jobs:
           echo keyPassword=test123456 >> local.properties
           echo fileDir=`pwd`/test_key.jks >> local.properties
 
+          # ========== 将自定义包名写入local.properties ==========
+          echo customPackageName=${{ github.event.inputs.customPackageName }} >> local.properties
+
       - name: Cache gradle
         uses: actions/cache@v4
         with:
@@ -79,7 +88,8 @@ jobs:
       - name: Build all
         id: buildAll
         run: |
-          ./gradlew assemble
+         # ========== 传递自定义包名到Gradle构建 ==========
+          ./gradlew assemble -PcustomPackageName=${{ github.event.inputs.customPackageName }}
           echo "releaseName=$(ls app/build/outputs/apk/release/*.apk | awk -F '(/|.apk)' '{print $6}')" >> $GITHUB_OUTPUT
           echo "debugName=$(ls app/build/outputs/apk/debug/*.apk | awk -F '(/|.apk)' '{print $6}')" >> $GITHUB_OUTPUT
           echo "releaseFile=$(ls app/build/outputs/apk/release/*.apk)" >> $GITHUB_OUTPUT
