@@ -144,7 +144,7 @@
     <string name="settings_overwrite_summary">Esta categoria de itens será forçada como ativada se os interruptores estiverem verificados</string>
     <string name="settings_default_value">Valor padrão: %s</string>
     <string name="settings_data_isolation">Isolamento de dados</string>
-    <string name="settings_data_isolation_summary">Dados da aplicação: %s\nDados Vold das aplicações : %s\nForçar montagem: %s</string>
+    <string name="settings_data_isolation_summary" formatted="false">Dados da aplicação: %s\nDados Vold das aplicações : %s\nForçar montagem: %s</string>
     <string name="settings_data_isolation_unsupported">Esta opção só está disponível no Android 11 ou superior</string>
     <string name="settings_app_data_isolation">Isolamento de dados da aplicação</string>
     <string name="settings_vold_app_data_isolation">Isolamento dos dados Vold da aplicação</string>

@@ -144,7 +144,7 @@
     <string name="settings_overwrite_summary">This category items will be forced as enabled if the switches are checked</string>
     <string name="settings_default_value">Default value: %s</string>
     <string name="settings_data_isolation">Ізоляція даних</string>
-    <string name="settings_data_isolation_summary">Дані додатку: %s\nПопередні дані додатку: %s\nПримусове монтування: %s</string>
+    <string name="settings_data_isolation_summary" formatted="false">Дані додатку: %s\nПопередні дані додатку: %s\nПримусове монтування: %s</string>
     <string name="settings_data_isolation_unsupported">Цей параметр доступний лише на Android 11 і вище</string>
     <string name="settings_app_data_isolation">Ізоляція даних додатку</string>
     <string name="settings_vold_app_data_isolation">Ізоляція даних додатку Vold</string>

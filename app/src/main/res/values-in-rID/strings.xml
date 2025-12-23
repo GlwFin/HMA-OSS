@@ -144,7 +144,7 @@
     <string name="settings_overwrite_summary">Item kategori ini akan dipaksa diaktifkan jika tombol dicentang</string>
     <string name="settings_default_value">Nilai default: %s</string>
     <string name="settings_data_isolation">Isolasi data</string>
-    <string name="settings_data_isolation_summary">Data apl: %s\nVold data apl: %s\nPaksa mount: %s</string>
+    <string name="settings_data_isolation_summary" formatted="false">Data apl: %s\nVold data apl: %s\nPaksa mount: %s</string>
     <string name="settings_data_isolation_unsupported">Opsi ini hanya tersedia di Android 11 dan di atasnya</string>
     <string name="settings_app_data_isolation">Isolasi data aplikasi</string>
     <string name="settings_vold_app_data_isolation">Isolasi Vold data aplikasi</string>
